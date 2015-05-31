@@ -12,9 +12,6 @@ server = "irc.freenode.net"
 channel = "#fruit"
 botnick = "Cowbot_31337"
 
-fruits = open('/tmp/fruits.txt', 'r').read().split('\n')
-
-
 def ping():
     ircsock.send("PONG :Pong\n")
 
@@ -28,7 +25,7 @@ def cowsay(s):
     except Exception as e:
         ircsock.send("PRIVMSG " + channel + " : Cowbot failed: " + str(e) + "\n")
             
-Class MySock(socket.socket):
+class MySock(socket.socket):
     def send(self, s):
         self.sendall(bytes(s, "UTF-8"))
 
@@ -68,5 +65,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-#    :orwell.freenode.net 353 Fruitbot_24324 = #fruit :Fruitbot_24324 Fruitbot_242324 droghio triazo @ChanServ
