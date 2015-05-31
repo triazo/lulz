@@ -20,12 +20,15 @@ def ping():
 
 
 def cowsay(s):
-    s = subprocess.check_output(['cowsay']+s.split(' ')).decode('UTF-8')
-    for line in s.split('\n'):
-      ircsock.send("PRIVMSG "+ channel +" : "+ line +"\n")
-      time.sleep(1)
-
-class MySock(socket.socket):
+    try:
+        s = subprocess.check_output(['cowsay']+s.split(' ')).decode('UTF-8')
+        for line in s.split('\n'):
+            ircsock.send("PRIVMSG "+ channel +" : "+ line +"\n")
+            time.sleep(1)
+    except Exception as e:
+        ircsock.send("PRIVMSG " + channel + " : Cowbot failed: " + str(e) + "\n")
+            
+Class MySock(socket.socket):
     def send(self, s):
         self.sendall(bytes(s, "UTF-8"))
 
