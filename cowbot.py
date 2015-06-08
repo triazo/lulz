@@ -8,9 +8,10 @@ import subprocess
 
 global ircsock
 
-server = "irc.freenode.net"
-channel = "#fruit"
-botnick = "Cowbot_31337"
+# currently configured for rpisec network
+server = "irc.rpis.ec"
+channel = "#rpisec"
+botnick = "Cowbot"
 
 def ping():
     ircsock.send("PONG :Pong\n")
@@ -24,7 +25,7 @@ def cowsay(s):
             time.sleep(1)
     except Exception as e:
         ircsock.send("PRIVMSG " + channel + " : Cowbot failed: " + str(e) + "\n")
-            
+
 class MySock(socket.socket):
     def send(self, s):
         self.sendall(bytes(s, "UTF-8"))
@@ -64,4 +65,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
